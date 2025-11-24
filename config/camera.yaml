@@ -1,0 +1,41 @@
+galaxy_camera_ros2:
+  ros__parameters:
+    camera_name: galaxy_camera_ros2
+    camera_frame_id: KE0200010097
+
+    Camera:
+      serial_number: "KE0200010097"
+      cam_info_url: package://galaxy_camera_ros2/config/ost.yaml
+      frame_rate: 30.0
+      pixel_format: "bayer_rg8"
+      image_width: 1280  # 1280
+      image_height: 1024  # 1024
+
+      Trigger:
+        enable: false
+        line: 3
+        activation: rising
+        delay: 0.0
+
+      # Exposure auto_mode accepts: continuous/once/off or boolean (true->continuous, false->off)
+      Exposure:
+        auto_mode: continuous
+        value: 4000.0
+        min: 100.0  # 100us
+        max: 4500.0 # 4500us
+
+      # Gain auto_mode accepts: continuous/once/off or boolean (true->continuous, false->off)
+      Gain:
+        auto_mode: continuous
+        value: 10.0 
+        min: 0.0 # 0dB
+        max: 16.0 # 16dB
+
+      Gamma:
+        enable: true
+        value: 1.0
+        selector: 1
+
+      Contrast:
+        enable: false
+        value: 5
