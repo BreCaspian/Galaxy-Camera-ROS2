@@ -1,14 +1,21 @@
 # Galaxy-Camera-ROS2
-
 ---
 
 **ROS 2 driver for Daheng (大恒) Galaxy industrial cameras.** The node configures a device through the official Galaxy SDK, converts the Bayer stream to color images and publishes synchronized `image_raw` and `camera_info` topics for downstream perception components.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/BreCaspian/Galaxy-Camera-ROS2/main/doc/DAHENG-Camera.jpg" width="30%" />
+  <br>
+  <em>大恒工业相机</em>
+</p>
+
+---
 
 ## Requirements
 
 - ROS 2 Humble with `rclcpp`, `image_transport`, `camera_info_manager`
 - Daheng Galaxy SDK (`/opt/Galaxy/`, `libgxiapi.so`, `DxImageProc.so` etc.) installed on the system
-
+---
 ## Build
 
 ```bash
@@ -19,7 +26,7 @@ colcon build --packages-select galaxy_camera_ros2
 source /opt/ros/humble/setup.bash
 source install/setup.bash
 ```
-
+---
 ## Configuration
 
 Runtime settings live in `config/camera.yaml`, which is a ROS 2 parameter file following the standard
@@ -47,7 +54,7 @@ Important fields include:
 
 > [!WARNING]
 > The calibration file `config/ost.yaml` must match the output resolution; the driver will abort if the dimensions disagree in order to avoid publishing inconsistent camera models.
-
+---
 ## Running
 
 ```bash
@@ -80,11 +87,12 @@ In RViz2:
 Click Add → Image
 Select topic: /image_raw
 
+---
 ## Notes
 
 - compressedDepth only supports single-channel 16-bit/32-bit depth maps, while the current driver outputs color bgr8. Therefore, selecting /image_raw/compressedDepth will continue to result in plugin errors, which is the expected behavior (it requires a depth camera to enable).
 - Dynamic parameter updates are not yet implemented; modify the YAML file and restart the node to apply changes.
-
+---
 ## Maintainer & License
 
 - Maintainer: yaoyuzhuo6@gmail.com 
