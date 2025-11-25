@@ -2,12 +2,12 @@
 
 ---
 
-ROS 2 driver for Daheng Galaxy industrial cameras. The node configures a device through the official Galaxy SDK, converts the Bayer stream to color images and publishes synchronized `image_raw` and `camera_info` topics for downstream perception components.
+**ROS 2 driver for Daheng (大恒) Galaxy industrial cameras.** The node configures a device through the official Galaxy SDK, converts the Bayer stream to color images and publishes synchronized `image_raw` and `camera_info` topics for downstream perception components.
 
 ## Requirements
 
-- ROS 2 Humble (or later) with `rclcpp`, `image_transport`, `camera_info_manager`
-- Daheng Galaxy SDK (`libgxiapi.so`) installed on the system
+- ROS 2 Humble with `rclcpp`, `image_transport`, `camera_info_manager`
+- Daheng Galaxy SDK (`/opt/Galaxy/`, `libgxiapi.so`, `DxImageProc.so` etc.) installed on the system
 
 ## Build
 
@@ -16,6 +16,7 @@ cd ~/ros2_ws/src
 git clone https://github.com/BreCaspian/Galaxy-Camera-ROS2.git galaxy_camera_ros2
 cd ..
 colcon build --packages-select galaxy_camera_ros2
+source /opt/ros/humble/setup.bash
 source install/setup.bash
 ```
 
@@ -44,7 +45,8 @@ Important fields include:
   *When changing the resolution, update `config/ost.yaml` accordingly; the node will override mismatched dimensions but calibration accuracy will be impacted.*
 - `Camera.Trigger.*`, `Camera.Exposure.*`, `Camera.Gain.*`, `Camera.Gamma.*`, `Camera.Contrast.*` – low-level SDK parameters to control triggering and image quality.
 
-The calibration file `config/ost.yaml` must match the output resolution; the driver will abort if the dimensions disagree in order to avoid publishing inconsistent camera models.
+> [!WARNING]
+> The calibration file `config/ost.yaml` must match the output resolution; the driver will abort if the dimensions disagree in order to avoid publishing inconsistent camera models.
 
 ## Running
 
@@ -60,20 +62,31 @@ Topics:
 
 Use standard ROS 2 tools for visualization or playback:
 
+**View Image in RQt**
 ```bash
 ros2 run rqt_image_view rqt_image_view
+```
+Select /image_raw.
+```bash
 ros2 topic echo /camera_info
 ```
 
+**View Camera Images in RViz2**
+
+```bash
+ros2 run rviz2 rviz2
+```
+In RViz2: 
+Click Add → Image
+Select topic: /image_raw
+
 ## Notes
 
-- The driver currently targets a single camera instance. Multi-camera setups can be achieved by launching the component multiple times with different parameter files.
+- compressedDepth only supports single-channel 16-bit/32-bit depth maps, while the current driver outputs color bgr8. Therefore, selecting /image_raw/compressedDepth will continue to result in plugin errors, which is the expected behavior (it requires a depth camera to enable).
 - Dynamic parameter updates are not yet implemented; modify the YAML file and restart the node to apply changes.
 
 ## Maintainer & License
 
-- Maintainer: yaoyuzhuo (yaoyuzhuo6@gmail.com / GitHub: [BreCaspian](https://github.com/BreCaspian))
+- Maintainer: yaoyuzhuo6@gmail.com 
 - License: GPL-3.0-or-later
-
-compressedDepth 仅支持单通道 16-bit/32-bit 深度图，而当前驱动输出为彩色 bgr8，因此选择 /image_raw/compressedDepth 时会继续看到插件抛错，这是预期行为（需要使用深度相机才能启用）。
 
