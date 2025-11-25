@@ -1,7 +1,7 @@
 # Galaxy-Camera-ROS2
 ---
 
-**ROS 2 driver for Daheng (大恒) Galaxy industrial cameras.** The node configures a device through the official Galaxy SDK, converts the Bayer stream to color images and publishes synchronized `image_raw` and `camera_info` topics for downstream perception components.
+**ROS 2 driver for Daheng Galaxy industrial cameras (大恒工业相机驱动).** The node configures a device through the official Galaxy SDK, converts the Bayer stream to color images and publishes synchronized `image_raw` and `camera_info` topics for downstream perception components.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/BreCaspian/Galaxy-Camera-ROS2/main/doc/DAHENG-Camera.jpg" width="30%" />
