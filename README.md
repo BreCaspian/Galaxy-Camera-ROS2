@@ -25,8 +25,8 @@
 cd ~/ros2_ws/src
 git clone https://github.com/BreCaspian/Galaxy-Camera-ROS2.git galaxy_camera_ros2
 cd ..
-colcon build --packages-select galaxy_camera_ros2
 source /opt/ros/humble/setup.bash
+colcon build --packages-select galaxy_camera_ros2
 source install/setup.bash
 ```
 ---
