@@ -170,7 +170,7 @@ typedef int32_t GX_OPEN_MODE_CMD;
 //Chinese	IP配置方式
 //English	IP configuration
 //------------------------------------------------------------------------------
-typedef enum GX_IP_CONFIGURE_MODE_LIST
+enum GX_IP_CONFIGURE_MODE_LIST
 {
 	GX_IP_CONFIGURE_DHCP       = 0x6,					///< \Chinese 启用DHCP，自动获取IP地址	\English Enable the DHCP mode to allocate the IP address by the DHCP server
 	GX_IP_CONFIGURE_LLA        = 0x4,					///< \Chinese 使用LLA方式分配IP地址		\English Enable the LLA mode to allocate the IP address

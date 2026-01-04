@@ -390,6 +390,11 @@ void GalaxyCameraLowLevel::convertImage(PGX_FRAME_BUFFER frame, FrameBuffer& out
   {
     DxImageImprovment(destination, destination, frame->nWidth, frame->nHeight, 0, contrast_lut, gamma_lut);
   }
+
+  for (size_t idx = 0; idx + 2 < output.data.size(); idx += 3)
+  {
+    std::swap(destination[idx], destination[idx + 2]);
+  }
 }
 
 void GalaxyCameraLowLevel::checkStatus(GX_STATUS status, const std::string& msg)

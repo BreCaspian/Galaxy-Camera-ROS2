@@ -93,12 +93,11 @@ Select topic: /image_raw
 ---
 ## Notes
 
-- compressedDepth only supports single-channel 16-bit/32-bit depth maps, while the current driver outputs color bgr8. Therefore, selecting /image_raw/compressedDepth will continue to result in plugin errors, which is the expected behavior (it requires a depth camera to enable).
-- Dynamic parameter updates are not yet implemented; modify the YAML file and restart the node to apply changes.
-- [为什么 /image_raw 是绿油油的？](https://github.com/BreCaspian/Alps/blob/main/notes/2025-11-26-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84image_raw%E6%98%AF%E7%BB%BF%E8%89%B2.md)
+- `compressedDepth` only supports single-channel depth images; this driver outputs color `bgr8`, so `/image_raw/compressedDepth` is expected to fail.
+- Dynamic parameter updates are not implemented; edit the YAML and restart the node.
+- If colors look wrong, confirm `Camera.pixel_format` matches the sensor Bayer pattern (bayer_rg8/gr8/gb8/bg8).
 ---
 ## Maintainer & License
 
 - Maintainer: yaoyuzhuo6@gmail.com 
 - License: GPL-3.0-or-later
-
